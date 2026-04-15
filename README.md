@@ -55,3 +55,18 @@ A política implementada atua diretamente na origem do problema (processo), impe
 ---
 
 # 🧩 Código de Domínio (Clean Code + Regra de Negócio)
+
+## 📌 Snippet — Regra Crítica de Validação
+
+```java
+public double processPurchase(String coupon, double originalAmount, double userBalance) {
+    double discountedAmount = applyDiscount(coupon, originalAmount);
+    validateTransaction(discountedAmount, userBalance);
+    return discountedAmount;
+}
+
+private void validateTransaction(double finalAmount, double userBalance) {
+    if (userBalance < finalAmount) {
+        throw new IllegalStateException("Saldo insuficiente para concluir a compra.");
+    }
+}
